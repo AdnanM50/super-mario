@@ -23,7 +23,6 @@ const Coin = ({ position, onCollect }) => {
         onCollect();
       }
     };
-
     // Add event listener to check collision after each movement
     window.addEventListener('keydown', checkCollision);
 

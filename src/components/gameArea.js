@@ -7,7 +7,10 @@ import Mushroom from './mushroom';
 import HUD from './hud';
 
 const GameArea = () => {
-  const [marioPosition, setMarioPosition] = useState({ x: 50, y: 0 });
+  //const [marioPosition, setMarioPosition] = useState({ x: 50, y: 0 });
+  const [marioPosition, setMarioPosition] = useState({ x: 0, y: 0 });
+
+  const [isJumping, setIsJumping] = useState(false);
   const [score, setScore] = useState(0);
   const [coins, setCoins] = useState(0);
   const [marioSize, setMarioSize] = useState('small'); // 'small' or 'large'
@@ -15,30 +18,39 @@ const GameArea = () => {
 
   // Update Mario's position based on arrow key input
   useEffect(() => {
+    // Set Mario's initial position at the bottom-left after the component has mounted
+    const startPosition = { x: 0, y: window.innerHeight - 130 };
+    setMarioPosition(startPosition);
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       let { x, y } = marioPosition;
       const moveDistance = 10;
-      const maxY = window.innerHeight - 50; // Prevent Mario from going beyond 100vh
+      const jumpHeight = 100;
+      const maxY = window.innerHeight - 130; // Adjusted for Mario's height
 
-      // Handle Mario's movement
-      switch (e.key) {
-        case 'ArrowUp':
-          y = Math.max(y - moveDistance, 0); // Prevent moving above the top
-          break;
-        case 'ArrowDown':
-          y = Math.min(y + moveDistance, maxY); // Prevent moving below the bottom
-          break;
-        case 'ArrowLeft':
-          x = Math.max(x - moveDistance, 0); // Prevent moving beyond the left edge
-          break;
-        case 'ArrowRight':
-          x = Math.min(x + moveDistance, window.innerWidth - 50); // Prevent moving beyond the right edge
-          break;
-        default:
-          break;
+      if (e.key === 'ArrowUp' && !isJumping) {
+        // Start the jump
+        setIsJumping(true);
+        y = Math.max(y - jumpHeight, 0); // Jump up
+        setMarioPosition({ x, y });
+
+        // Bring Mario back down after 500ms
+        setTimeout(() => {
+          setMarioPosition((prevPosition) => ({ ...prevPosition, y: maxY }));
+          setIsJumping(false);
+        }, 500);
       }
 
-      setMarioPosition({ x, y });
+      // Handle other movements (e.g., left, right)
+      if (e.key === 'ArrowLeft') {
+        x = Math.max(x - moveDistance, 0); // Move left
+        setMarioPosition({ x, y });
+      } else if (e.key === 'ArrowRight') {
+        x = Math.min(x + moveDistance, window.innerWidth * 0.7 - 50); // Move right, with boundary
+        setMarioPosition({ x, y });
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -46,7 +58,7 @@ const GameArea = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [marioPosition]);
+  }, [marioPosition, isJumping]);
 
   // Handle coin collection
   const handleCoinCollect = () => {
