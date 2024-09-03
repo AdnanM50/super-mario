@@ -13,7 +13,6 @@ const Coin = ({ position, onCollect }) => {
       const marioRect = marioElement.getBoundingClientRect();
       const coinRect = coinRef.current.getBoundingClientRect();
 
-      // Check for collision with Mario
       if (
         marioRect.x < coinRect.x + coinRect.width &&
         marioRect.x + marioRect.width > coinRect.x &&
@@ -23,7 +22,6 @@ const Coin = ({ position, onCollect }) => {
         onCollect();
       }
     };
-    // Add event listener to check collision after each movement
     window.addEventListener('keydown', checkCollision);
 
     return () => {
@@ -41,7 +39,7 @@ const Coin = ({ position, onCollect }) => {
         height: '30px',
         left: `${position.x}px`,
         top: `${position.y}px`,
-        zIndex: 20,  // Lower z-index so Mario appears in front
+        zIndex: 30,  
       }}
     >
       <Image src='/coin.png' alt="Coin" width={30} height={30} />

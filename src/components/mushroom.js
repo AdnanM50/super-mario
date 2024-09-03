@@ -7,14 +7,10 @@ const Mushroom = ({ position, onCollect }) => {
     const checkCollision = () => {
       const marioElement = document.querySelector('#mario');
       const mushroomElement = document.querySelector(`#mushroom-${position.x}-${position.y}`);
-
-      // Ensure both elements exist before accessing their bounding rectangles
       if (!marioElement || !mushroomElement) return;
 
       const marioRect = marioElement.getBoundingClientRect();
       const mushroomRect = mushroomElement.getBoundingClientRect();
-
-      // Check for collision with Mario
       if (
         marioRect.x < mushroomRect.x + mushroomRect.width &&
         marioRect.x + marioRect.width > mushroomRect.x &&
@@ -24,12 +20,9 @@ const Mushroom = ({ position, onCollect }) => {
         onCollect();
       }
     };
-
-    // Add event listener to check collision after each movement
     const handleKeydown = () => {
-      setTimeout(checkCollision, 0); // Ensure DOM is updated before checking collision
+      setTimeout(checkCollision, 0);
     };
-
     window.addEventListener('keydown', handleKeydown);
 
     return () => {

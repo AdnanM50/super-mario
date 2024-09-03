@@ -15,7 +15,7 @@ const Mario = ({ position, size }) => {
       left: `${position.x}px`,
       top: `${position.y}px`,
       transition: 'left 0.1s, top 0.1s',
-      zIndex: 30,  // Higher z-index to appear in front
+      zIndex: 30, 
     }}
   
   >
