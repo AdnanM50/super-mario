@@ -41,7 +41,7 @@ const Pillar = ({ position, onCollide }) => {
         top: `${position.y}px`,
       }}
     >
-      <Image src='/pillar.png' alt="Pillar" width={50} height={100} />
+      <Image src='/pillar.png' alt="Pillar" width={50} height={150} className='h-[150px] w-[50px]' />
     </div>
   );
 };

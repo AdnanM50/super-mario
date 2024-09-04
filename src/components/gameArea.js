@@ -14,11 +14,11 @@ const GameArea = () => {
   const [score, setScore] = useState(0);
   const [coins, setCoins] = useState(0);
   const [marioSize, setMarioSize] = useState("small");
-  const [level, setLevel] = useState(1);
+  // const [level, setLevel] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
-    const startPosition = { x: 0, y: window.innerHeight * 0.65 - 50 };
+    const startPosition = { x: 0, y: window.innerHeight * 0.65 - 35 };
     setMarioPosition(startPosition);
   }, []);
 
@@ -26,8 +26,8 @@ const GameArea = () => {
     const handleKeyDown = (e) => {
       let { x, y } = marioPosition;
       const moveDistance = 10;
-      const jumpHeight = 100;
-      const maxY = window.innerHeight * 0.65 - 50;
+      const jumpHeight = 150;
+      const maxY = window.innerHeight * 0.65 - 35;
 
       if (e.key === "ArrowUp" && !isJumping) {
         setIsJumping(true);
@@ -76,14 +76,14 @@ const GameArea = () => {
   }
 
   return (
-    <div className="relative flex justify-center items-center border !w-[70%] !h-[70vh] overflow-hidden bg-blue-400 bg-[url('/bg.png')]">
+    <div style={{ backgroundImage: "url('/bg.png')", backgroundPosition: "center" }} className="relative flex justify-center items-center border w-full lg:w-[70%] h-[70vh] overflow-hidden bg-blue-400 bg-no-repeat bg-cover">
       {!isGameOver && (
         <>
           <Mario position={marioPosition} size={marioSize} />
-          <Block position={{ x: 200, y: 300 }} />
+          <Block position={{ x: 200, y: 350 }} />
           <Coin position={{ x: 300, y: 300 }} onCollect={handleCoinCollect} />
-          <Mushroom position={{ x: 400, y: 300 }} onCollect={handleMushroomCollect} />
-          <Pillar position={{ x: 600, y: 250 }} onCollide={handleCollisionWithDanger} />
+          <Mushroom position={{ x: 400, y: 400 }} onCollect={handleMushroomCollect} />
+          <Pillar position={{ x: 600, y: 350 }} onCollide={handleCollisionWithDanger} />
           <Insect position={{ x: 800, y: 350 }} onCollide={handleCollisionWithDanger} />
           <HUD score={score} coins={coins} />
         </>
