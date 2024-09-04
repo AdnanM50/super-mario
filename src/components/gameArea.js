@@ -14,7 +14,6 @@ const GameArea = () => {
   const [score, setScore] = useState(0);
   const [coins, setCoins] = useState(0);
   const [marioSize, setMarioSize] = useState("small");
-  // const [level, setLevel] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
@@ -76,15 +75,15 @@ const GameArea = () => {
   }
 
   return (
-    <div style={{ backgroundImage: "url('/bg.png')", backgroundPosition: "center" }} className="relative flex justify-center items-center border w-full lg:w-[70%] h-[70vh] overflow-hidden bg-blue-400 bg-no-repeat bg-cover">
+    <div style={{ backgroundImage: "url('/bg.png')", backgroundPosition: "center" }} className="relative flex justify-center items-center border w-full lg:w-[70vw] h-[70vh] overflow-hidden bg-blue-400 bg-no-repeat bg-cover">
       {!isGameOver && (
         <>
           <Mario position={marioPosition} size={marioSize} />
-          <Block position={{ x: 200, y: 350 }} />
-          <Coin position={{ x: 300, y: 300 }} onCollect={handleCoinCollect} />
-          <Mushroom position={{ x: 400, y: 400 }} onCollect={handleMushroomCollect} />
-          <Pillar position={{ x: 600, y: 350 }} onCollide={handleCollisionWithDanger} />
-          <Insect position={{ x: 800, y: 350 }} onCollide={handleCollisionWithDanger} />
+          <Block position={{ x: 200, y: 100 }} />
+          <Coin position={{ x: 300, y: 150 }} onCollect={handleCoinCollect} />
+          <Mushroom position={{ x: 400, y: 100 }} onCollect={handleMushroomCollect} />
+          <Pillar position={{ x: 600, y: 70 }} onCollide={handleCollisionWithDanger} />
+          <Insect position={{ x: 800, y: 100 }} onCollide={handleCollisionWithDanger} />
           <HUD score={score} coins={coins} />
         </>
       )}

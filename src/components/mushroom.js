@@ -37,8 +37,8 @@ const Mushroom = ({ position, onCollect }) => {
       style={{
         width: '40px',
         height: '40px',
-        left: `${position.x}px`,
-        top: `${position.y}px`,
+        left: `calc(${position.x}px)`,
+        bottom: `calc(${position.y}px)`,
       }}
     >
       <Image src='/mushroom.png' alt="Mushroom" width={40} height={40} />

@@ -37,8 +37,8 @@ const Coin = ({ position, onCollect }) => {
       style={{
         width: '30px',
         height: '30px',
-        left: `${position.x}px`,
-        top: `${position.y}px`,
+        left: `calc(${position.x}px)`,
+        bottom: `calc(${position.y}px)`,
         zIndex: 30,  
       }}
     >

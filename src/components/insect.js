@@ -47,8 +47,8 @@ const Insect = ({ position, onCollide }) => {
       style={{
         width: '40px',
         height: '40px',
-        left: `${insectPosition.x}px`,
-        top: `${insectPosition.y}px`,
+        left: `calc(${insectPosition.x}px)`,
+        bottom: `calc(${insectPosition.y}px)`,
       }}
     >
       <Image src='/insect.png' alt="Insect" width={40} height={40} />
